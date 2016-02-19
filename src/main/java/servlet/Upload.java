@@ -6,13 +6,14 @@
 package servlet;
 
 import bean.ObjectStorageConnector;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.common.Payloads;
 
 /**
  *
@@ -35,6 +36,22 @@ public class Upload extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+			File newfile = new File(request.getParameter("uploadfile"));
+            InputStream targetStream = new FileInputStream(newfile);
+            
+            Payload uploadfile = Payloads.create(newfile);
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Upload</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>yehey</h1>");
+            out.println("<h1>Servlet: " + newfile.getAbsolutePath() +" : "+ newfile.exists()+ "</h1>");
+            out.println("<h1>test</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
