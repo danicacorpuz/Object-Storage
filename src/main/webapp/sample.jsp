@@ -1,5 +1,7 @@
-<%@page import="org.openstack4j.*%>
-<%@page import="java.io.*"%>
+<%@page import="org.openstack4j.model.storage.object.SwiftAccount"%>
+<%@page import="org.openstack4j.openstack.OSFactory"%>
+<%@page import="org.openstack4j.api.OSClient"%>
+<%@page import="org.openstack4j.model.common.Identifier"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,6 +20,10 @@
             Identifier projectIdent = Identifier.byName(project);
 
             OSClient os = OSFactory.builderV3().endpoint(auth_url).credentials(userId, password).scopeToProject(projectIdent, domainIdent).authenticate();
+
+            out.println("<br><h10>here</h10>");
+
+            os.objectStorage().containers().create("yeaboy");
 
             out.println("<br><h10>here</h10>");
         %>
