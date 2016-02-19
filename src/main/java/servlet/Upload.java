@@ -7,11 +7,13 @@ package servlet;
 
 import bean.ObjectStorageConnector;
 import java.io.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.Payloads;
 
@@ -37,9 +39,9 @@ public class Upload extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 			File newfile = new File(request.getParameter("uploadfile"));
-            InputStream targetStream = new FileInputStream(newfile);
+            //InputStream targetStream = new FileInputStream(newfile);
             
-            Payload uploadfile = Payloads.create(newfile);
+            //Payload uploadfile = Payloads.create(newfile);
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");

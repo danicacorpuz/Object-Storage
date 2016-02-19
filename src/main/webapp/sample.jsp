@@ -1,14 +1,4 @@
-<%-- 
-    Document   : sample
-    Created on : Feb 19, 2016, 12:33:57 AM
-    Author     : Danica
---%>
-
-<%@page import="org.openstack4j.model.storage.object.SwiftAccount"%>
-<%@page import="org.openstack4j.openstack.OSFactory"%>
-<%@page import="org.openstack4j.api.OSClient"%>
-<%@page import="org.openstack4j.model.common.Identifier"%>
-<%@page import="org.openstack4j.model.common.Payloads"%>
+<%@page import="org.openstack4j.*%>
 <%@page import="java.io.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,11 +9,11 @@
     </head>
     <body>
         <%
-            String userId = "f9c3e14885be4fcfb3267cfc3e88b93f";
-            String password = "P4PwVim5}NB^PYI9";
+            String userId = "ec7f2a51ce6c4e2b8464e95fff499597";
+            String password = "mP1xlJD6]D!87Dbs";
             String auth_url = "https://identity.open.softlayer.com" + "/v3";
-            String domain = "904835";
-            String project = "object_storage_45fe448f_2414_4904_9c6c_ab0be8b2ece4";
+            String domain = "904797";
+            String project = "object_storage_f5e341c0_fe2b_4057_900e_cef0cfd92a52";
             Identifier domainIdent = Identifier.byName(domain);
             Identifier projectIdent = Identifier.byName(project);
 
