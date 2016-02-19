@@ -45,6 +45,7 @@ public class Download extends HttpServlet {
             for(int i=0; i<objectlist.size(); i++) {
                 if(filename.equals(objectlist.get(i).getName())) {
                     connect.downloadFile("sample", filename);
+					break;
                 }
             }
             response.sendRedirect("home.jsp");

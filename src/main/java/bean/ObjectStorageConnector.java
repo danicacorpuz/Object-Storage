@@ -64,9 +64,10 @@ public class ObjectStorageConnector {
             Identifier domainIdent = Identifier.byName(domainName);
             Identifier projectIdent = Identifier.byName(project);
             
-            os = OSFactory.builderV3()
+            OSClient os = OSFactory.builderV3()
                     .endpoint(auth_url)
-                    .credentials(userId, password, domainIdent)
+                    .credentials(userId, password)
+                    .scopeToProject(projectIdent, domainIdent)
                     .authenticate();
             
             account = os.objectStorage().account().get();
