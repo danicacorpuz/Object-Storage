@@ -8,7 +8,8 @@
 <%@page import="org.openstack4j.openstack.OSFactory"%>
 <%@page import="org.openstack4j.api.OSClient"%>
 <%@page import="org.openstack4j.model.common.Identifier"%>
-<%@page import="org.openstack4j.model.common.Identifier"%>
+<%@page import="org.openstack4j.model.common.Payloads"%>
+<%@page import="java.io.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
