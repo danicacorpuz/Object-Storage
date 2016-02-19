@@ -27,11 +27,7 @@
             Identifier domainIdent = Identifier.byName(domain);
             Identifier projectIdent = Identifier.byName(project);
 
-            OSClient os = OSFactory.builderV3()
-                    .endpoint(auth_url)
-                    .credentials(userId, password)
-                    .scopeToProject(projectIdent, domainIdent)
-                    .authenticate();
+            OSClient os = OSFactory.builderV3().endpoint(auth_url).credentials(userId, password).scopeToProject(projectIdent, domainIdent).authenticate();
 
             out.println("<br><h10>here</h10>");
         %>
