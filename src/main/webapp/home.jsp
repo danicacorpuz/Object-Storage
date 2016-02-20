@@ -13,8 +13,8 @@
     <body>
 		
         <form action="Upload" method="POST" enctype="multipart/form-data">
-            Select file to upload:<input type="file" name="fileName" /><br>
-            <input type="submit" value="Upload" />
+            Select file to upload:<input type="file" name="uploadfile" /><br>
+            <input type="submit" value="Upload File" />
         </form>
 		<br><br>
 
