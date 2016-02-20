@@ -33,11 +33,11 @@ public class ObjectStorageConnector {
     private OSClient os;
 	private SwiftAccount account;
 	
-	public boolean ObjectStorageConnector() {
-		return getConnection();
+	public void ObjectStorageConnector() {
+		getConnection();
 	}
 	
-    public boolean getConnection() {
+    public void getConnection() {
 
 		try {
             String envApp = System.getenv("VCAP_APPLICATION");
@@ -70,10 +70,7 @@ public class ObjectStorageConnector {
             
             account = os.objectStorage().account().get();
             
-			return true;
-            
         } catch (ParseException ex) {
-			return false;
         }
 	}
 	

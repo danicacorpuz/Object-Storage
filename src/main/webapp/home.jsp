@@ -19,6 +19,7 @@
 		<br><br>
 
         <%
+			/*
 			//Download
             ObjectStorageClient connect = new ObjectStorageClient();
             List<? extends SwiftObject> objectlist = connect.listAllObjects("sample");
@@ -28,6 +29,7 @@
                 out.println("<input type=\"submit\" value=\"Download File\" name=\""+ i +"\">");
                 out.println("</form>");
             }
+			*/
         %>
     </body>
 </html>
