@@ -46,22 +46,7 @@ public class Upload extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-			String userId = "ec7f2a51ce6c4e2b8464e95fff499597";
-            String password = "mP1xlJD6]D!87Dbs";
-            String auth_url = "https://identity.open.softlayer.com" + "/v3";
-            String domain = "904797";
-            String project = "object_storage_f5e341c0_fe2b_4057_900e_cef0cfd92a52";
-            Identifier domainIdent = Identifier.byName(domain);
-            Identifier projectIdent = Identifier.byName(project);
-
-            OSClient os = OSFactory.builderV3().endpoint(auth_url).credentials(userId, password).scopeToProject(projectIdent, domainIdent).authenticate();
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Upload</title>");
-            out.println("</head>");
-            out.println("<body>");
+			ObjectStorageConnector connect = new ObjectStorageConnector();
 			
 			String filename = null;
             Payload uploadfile = null;
@@ -70,8 +55,6 @@ public class Upload extends HttpServlet {
 
                 FileItemFactory factory = new DiskFileItemFactory();
                 ServletFileUpload upload = new ServletFileUpload(factory);
-
-                out.println("<h1>multipart</h1>");
 
                 try {
 
@@ -88,12 +71,10 @@ public class Upload extends HttpServlet {
                     }
 
                     if (!filename.isEmpty() && !(uploadfile == null)) {
-                        os.objectStorage().objects().put("sample", filename, uploadfile);
-                        out.println("File Uploaded Successfully!");
+                        connect.uploadFile("sample", filename, uploadfile);
                     }
 
                 } catch (Exception e) {
-                    out.println("File Uploaded Unsuccessfully!");
                 }
             }
             out.println("</body>");

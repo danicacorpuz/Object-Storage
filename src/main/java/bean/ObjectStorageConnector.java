@@ -33,11 +33,9 @@ public class ObjectStorageConnector {
     private OSClient os;
 	private SwiftAccount account;
 	
-	/*
 	public boolean ObjectStorageConnector() {
 		return getConnection();
 	}
-	*/
 	
     public boolean getConnection() {
 
