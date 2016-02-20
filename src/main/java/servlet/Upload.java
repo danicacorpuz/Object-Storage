@@ -10,20 +10,29 @@ import bean.ObjectStorageConnector;
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import org.openstack4j.api.OSClient;
 import org.openstack4j.model.common.Identifier;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.Payloads;
 import org.openstack4j.openstack.OSFactory;
+
+import java.util.List;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -45,11 +54,11 @@ public class Upload extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+			
 			ObjectStorageConnector connect = new ObjectStorageConnector();
 			
 			String filename = null;
-            Payload uploadfile = null;
+            Payload upfile = null;
 
             if (ServletFileUpload.isMultipartContent(request)) {
 
@@ -66,19 +75,19 @@ public class Upload extends HttpServlet {
                         if (isFormField) {
                         } else {
                             filename = fileItem.getName();
-                            uploadfile = Payloads.create(fileItem.getInputStream());
+                            upfile = Payloads.create(fileItem.getInputStream());
                         }
                     }
 
-                    if (!filename.isEmpty() && !(uploadfile == null)) {
-                        connect.uploadFile("sample", filename, uploadfile);
+                    if (!filename.isEmpty() && !(upfile == null)) {
+                        connect.uploadFile("sample", filename, upfile);
                     }
 
                 } catch (Exception e) {
                 }
             }
-            out.println("</body>");
-            out.println("</html>");
+			response.sendRedirect("home.jsp");
+			
         }
     }
 

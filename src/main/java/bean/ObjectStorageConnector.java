@@ -19,21 +19,21 @@ import org.openstack4j.openstack.OSFactory;
  
 public class ObjectStorageConnector {
 	
-	private String auth_url;
-    private String project;
-    private String projectId;
-    private String region;
-    private String userId;
-    private String username;
-    private String password;
-    private String domainId;
-    private String domainName;
-    private Identifier domainIdent;
-    private Identifier projectIdent;
-    private OSClient os;
-	private SwiftAccount account;
+	private String auth_url = "";
+    private String project = "";
+    private String projectId = "";
+    private String region = "";
+    private String userId = "";
+    private String username = "";
+    private String password = "";
+    private String domainId = "";
+    private String domainName = "";
+    private Identifier domainIdent = null;
+    private Identifier projectIdent = null;
+    private OSClient os = null;
+	private SwiftAccount account = null;
 	
-	public void ObjectStorageConnector() {
+	public ObjectStorageConnector() {
 		getConnection();
 	}
 	
@@ -85,7 +85,7 @@ public class ObjectStorageConnector {
     }
     
     public void uploadFile(String cName, String fName, Payload payload) {
-        String etag = os.objectStorage().objects().put(cName, fName, payload);
+        String check = os.objectStorage().objects().put(cName, fName, payload);
     }
     
     public void downloadFile(String cName, String fName) {

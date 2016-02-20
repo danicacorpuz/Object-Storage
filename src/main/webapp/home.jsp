@@ -19,9 +19,9 @@
 		<br><br>
 
         <%
-			/*
+		/*
 			//Download
-            ObjectStorageClient connect = new ObjectStorageClient();
+            ObjectStorageConnector connect = new ObjectStorageConnector();
             List<? extends SwiftObject> objectlist = connect.listAllObjects("sample");
             for(int i=0; i<objectlist.size(); i++) {
                 out.println("<form action=\"Download\" method=\"POST\">");
