@@ -6,16 +6,20 @@
 package servlet;
 
 import bean.ObjectStorageConnector;
+
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.List;
 import org.openstack4j.model.storage.object.SwiftObject;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -35,20 +39,45 @@ public class Download extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-			
-            ObjectStorageConnector connect = new ObjectStorageConnector();
-            List<? extends SwiftObject> objectlist = connect.listAllObjects("sample");
+				
+		//response.setContentType("text/html;charset=UTF-8");
+        //PrintWriter out = response.getWriter()
+        try {
+            SwiftObject swiftObj;
+            InputStream inStr = null;
+            OutputStream outStr = null;
+
+            List<? extends SwiftObject> objectlist = os.objectStorage().objects().list("sample");
             String filename = request.getParameter("filename");
-			
-            for(int i=0; i<objectlist.size(); i++) {
-                if(filename.equals(objectlist.get(i).getName())) {
-                    connect.downloadFile("sample", filename);
-					break;
+
+            for (int i = 0; i < objectlist.size(); i++) {
+                if (filename.equals(objectlist.get(i).getName())) {
+                    swiftObj = os.objectStorage().objects().get("sample", filename);
+                    response.setContentType(swiftObj.getMimeType());
+                    response.setHeader("Content-Disposition", "attachment; filename=\""+filename+"\"");
+                    inStr = swiftObj.download().getInputStream();
+                    outStr = response.getOutputStream();
+                    /*
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = -1;
+                    
+                    while((bytesRead = inStr.read(buffer)) != -1) {
+                        outStr.write(buffer, 0, bytesRead);
+                    }
+                    inStr.close();
+                    outStr.flush();
+                    outStr.close();
+                    */
+                    IOUtils.copy(inStr, outStr);
+                    inStr.close();
+                    outStr.flush();
+                    outStr.close();
+                    
                 }
             }
-            response.sendRedirect("home.jsp");
+            
+        } catch(Exception e) {
+            
         }
     }
 
