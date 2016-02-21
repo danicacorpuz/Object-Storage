@@ -49,7 +49,7 @@ public class Download extends HttpServlet {
             InputStream inStr = null;
             OutputStream outStr = null;
 
-            List<? extends SwiftObject> objectlist = os.objectStorage().objects().list("sample");
+            List<? extends SwiftObject> objectlist = connect.listAllObjects();
             String filename = request.getParameter("filename");
 
             for (int i = 0; i < objectlist.size(); i++) {
