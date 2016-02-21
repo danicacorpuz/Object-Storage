@@ -43,6 +43,8 @@ public class Download extends HttpServlet {
 		//response.setContentType("text/html;charset=UTF-8");
         //PrintWriter out = response.getWriter()
         try {
+			ObjectStorageConnector connect = new ObjectStorageConnector();
+			
             SwiftObject swiftObj;
             InputStream inStr = null;
             OutputStream outStr = null;
@@ -52,7 +54,7 @@ public class Download extends HttpServlet {
 
             for (int i = 0; i < objectlist.size(); i++) {
                 if (filename.equals(objectlist.get(i).getName())) {
-                    swiftObj = os.objectStorage().objects().get("sample", filename);
+                    swiftObj = connect.getFile("sample", filename);
                     response.setContentType(swiftObj.getMimeType());
                     response.setHeader("Content-Disposition", "attachment; filename=\""+filename+"\"");
                     inStr = swiftObj.download().getInputStream();

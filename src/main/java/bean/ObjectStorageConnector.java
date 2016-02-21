@@ -88,8 +88,8 @@ public class ObjectStorageConnector {
         String check = os.objectStorage().objects().put(cName, fName, payload);
     }
     
-    public void downloadFile(String cName, String fName) {
-        os.objectStorage().objects().download(cName, fName);
+    public SwiftObject getFile(String cName, String fName) {
+		return os.objectStorage().objects().get(cName, fName);
     }
 	
 	public SwiftAccount getAccount() {
