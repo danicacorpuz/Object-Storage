@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import bean.ObjectStorageConnector;
+import connector.ObjectStorageConnector;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +49,7 @@ public class Download extends HttpServlet {
             InputStream inStr = null;
             OutputStream outStr = null;
 
-            List<? extends SwiftObject> objectlist = connect.listAllObjects();
+            List<? extends SwiftObject> objectlist = connect.listAllObjects("sample");
             String filename = request.getParameter("filename");
 
             for (int i = 0; i < objectlist.size(); i++) {
@@ -74,12 +74,9 @@ public class Download extends HttpServlet {
                     inStr.close();
                     outStr.flush();
                     outStr.close();
-                    
                 }
             }
-            
         } catch(Exception e) {
-            
         }
     }
 

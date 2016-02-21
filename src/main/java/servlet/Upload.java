@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import bean.ObjectStorageConnector;
+import connector.ObjectStorageConnector;
 
 import java.io.*;
 import java.util.Iterator;
@@ -78,12 +78,10 @@ public class Upload extends HttpServlet {
                     if (!filename.isEmpty() && !(upfile == null)) {
                         connect.uploadFile("sample", filename, upfile);
                     }
-
                 } catch (Exception e) {
                 }
             }
 			response.sendRedirect("home.jsp");
-			
         }
     }
 
