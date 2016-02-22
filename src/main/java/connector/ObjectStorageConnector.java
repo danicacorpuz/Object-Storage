@@ -83,8 +83,12 @@ public class ObjectStorageConnector {
         return os.objectStorage().containers().delete(cName).isSuccess();
     }
     
-    public void uploadFile(String cName, String fName, Payload payload) {
-        String check = os.objectStorage().objects().put(cName, fName, payload);
+    public String uploadFile(String cName, String fName, Payload payload) {
+        return os.objectStorage().objects().put(cName, fName, payload);
+    }
+	
+	public boolean deleteFile(String cName, String fName) {
+        return os.objectStorage().objects().delete(cName, fName).isSuccess();
     }
     
     public SwiftObject getFile(String cName, String fName) {

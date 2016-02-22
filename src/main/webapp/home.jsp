@@ -1,6 +1,7 @@
 
 <%@page import="java.util.List"%>
 <%@page import="org.openstack4j.model.storage.object.SwiftObject"%>
+<%@page import="connector.ObjectStorageConnector" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,9 +13,9 @@
     <body>
 		
         <form action="Upload" method="POST" enctype="multipart/form-data">
-            Select file to upload:<input type="file" name="uploadfile" /><br>
+            Select file to upload:<input type="file" name="uploadfile" />
             <input type="submit" value="Upload File" />
-        </form><br><br>
+        </form><br><br><br>
 		
         <%
             ObjectStorageConnector connect = new ObjectStorageConnector();
@@ -23,12 +24,17 @@
 				connect.createContainer("sample");
 			} else {
 				List<? extends SwiftObject> objectlist = connect.listAllObjects("sample");
-				for(int i=0; i<objectlist.size(); i++) {
-					out.println("<form action=\"Download\" method=\"GET\">");
+				out.println("<table>");
+				for (int i = 0; i < objectlist.size(); i++) {
+					out.println("<tr>");
+					out.println("<td><label for=\"filename\">"+ objectlist.get(i).getName() +"</label></td>");
+					out.println("<td><form action=\"Download\" method=\"GET\">");
 					out.println("<input type=\"hidden\" readonly name=\"filename\" value=\"" + objectlist.get(i).getName() + "\"/>");
-					out.println("<input type=\"submit\" value=\"Download File\" name=\""+ i +"\">");
-					out.println("</form>");
+					out.println("<input type=\"submit\" value=\"Download\" name=\"" + i + "\">");
+					out.println("</form></td>");
+					out.println("</tr>");
 				}
+				out.println("</table>");
 			}
         %>
     </body>
