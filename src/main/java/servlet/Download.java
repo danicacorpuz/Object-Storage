@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.openstack4j.model.storage.object.SwiftObject;
 import org.apache.commons.io.IOUtils;
+import org.openstack4j.model.storage.object.SwiftObject;
+
 
 /**
  *
